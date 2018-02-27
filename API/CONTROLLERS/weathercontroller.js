@@ -86,15 +86,21 @@ function WeatherController(){
         return isFlyable;
     }
     this.getWeather =  function(req, res){
-        weatherModel.findOne({spotid: req.params.id}, function(err, spot){
+        weatherModel.findOne({spotid: req.params.id}, function(err, weather){
             if(err) throw err;
-            res.json(spot);
+            res.json(weather);
         });
     }
     this.checkWeather =  function(req, res){
-        weatherModel.findOne({spotid: req.params.id}, function(err, spot){
+        weatherModel.findOne({spotid: req.params.id}, function(err, weather){
             if(err) throw err;
-            res.send(spot.isFlyable ? "Oui" : "Non");
+            res.send(weather.isFlyable ? "Oui" : "Non");
+        });
+    }
+    this.checkWeatherByName =  function(req, res){
+        weatherModel.findOne({name: req.body.name}, function(err, weather){
+            if(err) throw err;
+            res.send(weather.isFlyable ? "Oui" : "Non");
         });
     }
     this.getWeatherByName = function(req, res){
