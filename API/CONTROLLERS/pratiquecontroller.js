@@ -15,6 +15,11 @@ function PratiqueController(){
             res.json(pratique);
         });
     }
+    this.updatePratique = function(req, res){
+        PratiqueModel.updatePratique(function(pratique){
+            res.json(pratique);
+        });
+    }
     this.deletePratique = function(req, res){
         PratiqueModel.deletePratique( req.params.id, function(pratique){
             res.json(pratique);

@@ -36,7 +36,17 @@ var PratiqueModel = function PratiqueModel(){
         });
         
     }
-
+    this.updatePratique = function(pratique, sendUpdated){
+        var updateQuery = 'UPDATE pratiques SET name=? WHERE id=?'
+        var values = [
+            pratique.name,
+            pratique.id
+        ] 
+        db.connexion.query(updateQuery, values,function(err, result, fields){
+            if(err) throw err;
+            sendUpdated(pratique);
+        });
+    }
     this.linkPratique = function(id, idpratique, sendLink){
         var insertLink = 'INSERT INTO spot_pratique(id_spot, id_pratique) VALUES (?)';
         var values = [id, idpratique];

@@ -3,6 +3,8 @@ const pratiqueC = require('../CONTROLLERS/pratiquecontroller');
 
 router.post('/', pratiqueC.createPratique);
 
+router.put('/', pratiqueC.updatePratique);
+
 router.post('/link', pratiqueC.linkSpotPratique);
 
 router.get('/', pratiqueC.getAllPratique);
