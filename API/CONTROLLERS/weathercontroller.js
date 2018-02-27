@@ -26,16 +26,17 @@ var CardinalPoint = {
 function WeatherController(){
     this.updateWeather= function(req,res){
         spotModel.readAllSpot(function(spots){
-            spots.forEach(function(spot){
+            var requestsCount = 0;
+            spots.forEach(async function(spot){
                 var url = "api.openweathermap.org";
                 var options = {
                     host: url,
                     path: '/data/2.5/weather?lat='+spot.latitude+'&lon='+spot.longitude+'&appid='+process.env.OWM_ApiKey,
                     method: 'POST'
                   };
-                http.request(options, function(res){
-                    res.setEncoding('utf8');
-                    res.on('data', function (chunk) {
+                await http.request(options, function(_res){
+                    _res.setEncoding('utf8');
+                    _res.on('data', function (chunk) {
                         console.log(chunk);
                         chunk = JSON.parse(chunk);
                         var isFlyable = CheckIfFlyable(spot, chunk);
@@ -51,9 +52,15 @@ function WeatherController(){
                             if(err) throw err;
                         });
                     });
+                    _res.on('end', function(){
+                        requestsCount+=1;
+                        if(requestsCount == spots.length-1){
+                            res.send("All requests performed : "+(requestsCount+1));
+                        }
+                    });
                 }).end();
             });
-            res.send("Updated");
+
         });
     }
     var CheckIfFlyable = function(spot, chunk){
