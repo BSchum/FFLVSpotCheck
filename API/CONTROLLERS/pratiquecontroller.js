@@ -16,7 +16,7 @@ function PratiqueController(){
         });
     }
     this.updatePratique = function(req, res){
-        PratiqueModel.updatePratique(function(pratique){
+        PratiqueModel.updatePratique(req.body,function(pratique){
             res.json(pratique);
         });
     }

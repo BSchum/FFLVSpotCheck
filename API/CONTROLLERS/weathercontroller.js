@@ -86,31 +86,31 @@ function WeatherController(){
         return isFlyable;
     }
     this.getWeather =  function(req, res){
-        weatherModel.findOne({spotid: req.params.id}, function(err, weather){
+        weatherModel.find({spotid: req.params.id}).sort({date:-1}).exec(function(err, weather){
             if(err) throw err;
             res.json(weather);
         });
     }
     this.checkWeather =  function(req, res){
-        weatherModel.findOne({spotid: req.params.id}, function(err, weather){
+        weatherModel.findOne({spotid: req.params.id}).sort({date:-1}).exec(function(err, weather){
             if(err) throw err;
             res.send(weather.isFlyable ? "Oui" : "Non");
         });
     }
     this.checkWeatherByName =  function(req, res){
-        weatherModel.findOne({name: req.body.name}, function(err, weather){
+        weatherModel.findOne({name: req.body.name}).sort({date:-1}).exec(function(err, weather){
             if(err) throw err;
             res.send(weather.isFlyable ? "Oui" : "Non");
         });
     }
     this.getWeatherByName = function(req, res){
-        weatherModel.findOne({name: req.body.name}, function(err, weather){
+        weatherModel.find({name: req.body.name}).sort({date:-1}).exec(function(err, weather){
             if(err) throw err;
             res.send(weather);
         });
     }
     this.getWeathers = function(req, res){
-        weatherModel.find({}, function(err, weathers){
+        weatherModel.find({}).sort({date:-1}).exec(function(err, weathers){
             if(err) throw err;
             res.send(weathers);
         });

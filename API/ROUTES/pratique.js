@@ -13,6 +13,8 @@ router.get('/:id', pratiqueC.getPratique);
 
 router.delete('/:id', pratiqueC.deletePratique)
 
+router.put('/', pratiqueC.updatePratique)
+
 
 
 module.exports = router;
