@@ -43,6 +43,23 @@ var SpotModel = function SpotModel(){
         });
     }
 
+    this.updateSpot = function(spot, sendUpdated){
+        var updateQuery = 'UPDATE spots SET name=?,zip_code=?,structure=?,latitude=?,longitude=?,orientation=? WHERE id=?'
+        var values = [
+            spot.name,
+            spot.zip_code,
+            spot.structure,
+            spot.latitude,
+            spot.longitude,
+            spot.orientation,
+            spot.id
+        ] 
+        db.connexion.query(updateQuery, values,function(err, result, fields){
+            if(err) throw err;
+            sendUpdated(spot);
+        });
+    }
+
 }
 
 module.exports = new SpotModel();

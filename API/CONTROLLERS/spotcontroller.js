@@ -16,7 +16,9 @@ function SpotController(){
         });
     }    
     this.updateSpot = function(req, res){
-        
+        SpotModel.updateSpot(req.body, function(spot){
+            res.json(spot);
+        });      
     }    
 
     this.readSpot = function(req, res){

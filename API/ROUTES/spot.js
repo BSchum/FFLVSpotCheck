@@ -3,7 +3,7 @@ const spotC = require('../CONTROLLERS/spotcontroller');
 
 router.post('/', spotC.createSpot);
 
-router.put('/:id', spotC.updateSpot);
+router.put('/', spotC.updateSpot);
 
 router.get('/:id', spotC.readSpot);
 
