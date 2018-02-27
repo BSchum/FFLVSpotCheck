@@ -109,5 +109,11 @@ function WeatherController(){
             res.send(weather);
         });
     }
+    this.getWeathers = function(req, res){
+        weatherModel.find({}, function(err, weathers){
+            if(err) throw err;
+            res.send(weathers);
+        });
+    }
 }
 module.exports = new WeatherController();
